@@ -1,0 +1,309 @@
+/* General Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h5 {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #0056b3;
+}
+
+/* Navbar Styling */
+.navbar {
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1rem 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.link {
+    font-weight: 500;
+    color: #fff;
+    margin: 0.5rem;
+}
+
+.link:hover {
+    color: #000;
+}
+
+/* Hero Section */
+.hero-section {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 1rem;
+}
+
+.hero-section video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.hero-section h1 {
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    animation: fadeInDown 1.5s ease-out;
+}
+
+.hero-section p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    animation: fadeInUp 2s ease-out;
+}
+
+.hero-section .btn {
+    animation: fadeInUp 2.5s ease-out;
+}
+
+/* Countdown Section */
+#countdown {
+    background: linear-gradient(to right, #00c6ff, #0072ff);
+    color: #fff;
+    padding: 2rem 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    animation: fadeIn 2s ease-in-out;
+}
+
+#countdown .time-unit {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 1rem 1.5rem;
+    margin: 1rem;
+    color: #333;
+    display: inline-block;
+    text-align: center;
+    flex: 1 1 100px;
+    max-width: 150px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+#countdown .time-unit:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+#countdown h3 {
+    font-size: 2.5rem;
+    margin: 0;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#countdown p {
+    font-size: 1rem;
+    margin: 0;
+    color: #555;
+}
+
+/* Services Section */
+#services {
+    background: linear-gradient(to bottom, #ffffff, #f5f7fa);
+    padding: 4rem 0;
+    text-align: center;
+}
+
+#services h2 {
+    background: linear-gradient(to right, #ff758c, #ff7eb3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+#services .card {
+    background: #fff;
+    border: none;
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin: 1rem;
+    flex: 1 1 calc(33.333% - 2rem);
+    box-sizing: border-box;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+#services .card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+}
+
+#services .card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #333;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#services .card p {
+    font-size: 1rem;
+    color: #666;
+}
+
+@media screen and (max-width: 1024px) {
+    #services .card {
+        flex: 1 1 calc(50% - 2rem);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #services {
+        padding: 2rem 1rem;
+    }
+
+    #services .card {
+        flex: 1 1 100%;
+        margin: 1rem auto;
+    }
+}
+
+/* Testimonials Section */
+#testimonials {
+    background: linear-gradient(to bottom, #6a11cb, #2575fc);
+    color: #fff;
+    padding: 4rem 0;
+    text-align: center;
+}
+
+#testimonials .card {
+    background: #ffffff;
+    border: none;
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin: 1rem auto;
+    max-width: 500px;
+    color: #333;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#testimonials .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+}
+
+#testimonials blockquote {
+    font-size: 1.3rem;
+    font-style: italic;
+    position: relative;
+    color: #333;
+}
+
+#testimonials blockquote::before {
+    content: "“";
+    font-size: 4rem;
+    color: rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: -20px;
+    left: -30px;
+}
+
+#testimonials cite {
+    display: block;
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: #666;
+}
+
+.blackquote-footer{
+    margin-top: 5px;
+}
+
+/* General Mobile Adjustments */
+@media screen and (max-width: 480px) {
+    .navbar {
+        flex-direction: column;
+    }
+
+    .navbar .link {
+        margin: 0.5rem 0;
+    }
+
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+
+    .hero-section p {
+        font-size: 1rem;
+    }
+
+    #countdown .time-unit {
+        max-width: 120px;
+    }
+}
+
+/* Animation Keyframes */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* Back-to-Top Button */
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    padding: 10px 15px;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    display: none;
+    z-index: 1000;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.back-to-top:hover {
+    transform: scale(1.1);
+    opacity: 0.9;
+}

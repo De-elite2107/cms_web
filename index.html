@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faith Church</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">Faith Church</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="link" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="link" href="#events">Events</a></li>
+                    <li class="nav-item"><a class="link" href="#gallery">Gallery</a></li>
+                    <li class="nav-item"><a class="link" href="#testimonials">Testimonials</a></li>
+                    <li class="nav-item"><a class="link" href="#faq">FAQ</a></li>
+                    <li class="nav-item"><a class="link" href="#contact">Contact</a></li>
+                    <li class="nav-item"><a class="link" href="./login.html">Management Portal</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section position-relative text-white">
+        <video autoplay muted loop class="w-100">
+            <source src="hero.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="position-absolute top-50 start-50 translate-middle text-center">
+            <h1 class="display-4 fw-bold">Welcome to Faith Church</h1>
+            <p class="lead">Experience the love of God and the warmth of our community.</p>
+            <a href="#about" class="btn btn-primary">Learn More</a>
+        </div>
+    </section>
+
+    <!-- Countdown Section -->
+    <section id="countdown" class="py-5">
+        <div class="container text-center">
+            <h2 class="fw-bold">Countdown to Sunday Service</h2>
+            <div id="timer" class="d-flex justify-content-center gap-3 mt-4">
+                <div class="time-unit text-center">
+                    <h3 id="days" class="fw-bold display-5">00</h3>
+                    <p>Days</p>
+                </div>
+                <div class="time-unit text-center">
+                    <h3 id="hours" class="fw-bold display-5">00</h3>
+                    <p>Hours</p>
+                </div>
+                <div class="time-unit text-center">
+                    <h3 id="minutes" class="fw-bold display-5">00</h3>
+                    <p>Minutes</p>
+                </div>
+                <div class="time-unit text-center">
+                    <h3 id="seconds" class="fw-bold display-5">00</h3>
+                    <p>Seconds</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="fw-bold text-center mb-4">About Us</h2>
+            <p class="text-center">Faith Church is a community of believers committed to spreading the gospel, helping the needy, and nurturing spiritual growth. Join us and become a part of our family.</p>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-5">
+        <div class="container">
+            <h2 class="fw-bold text-center mb-4">Our Services</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card shadow-sm text-center">
+                        <div class="card-body">
+                            <h5 class="card-title">Sunday Worship</h5>
+                            <p class="card-text">Join us every Sunday for inspiring worship and a powerful message.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card shadow-sm text-center">
+                        <div class="card-body">
+                            <h5 class="card-title">Bible Study</h5>
+                            <p class="card-text">Deepen your understanding of the Word of God in our weekly sessions.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card shadow-sm text-center">
+                        <div class="card-body">
+                            <h5 class="card-title">Community Outreach</h5>
+                            <p class="card-text">Be a blessing to others by participating in our outreach programs.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section id="events" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="fw-bold text-center mb-4">Upcoming Events</h2>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Christmas Service</h5>
+                            <p>Date: December 25th | Time: 10 AM</p>
+                            <p>Celebrate the birth of Christ with us.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Youth Conference</h5>
+                            <p>Date: January 15th | Time: 9 AM</p>
+                            <p>Empowering the next generation through Christ.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-5">
+        <div class="container">
+            <h2 class="fw-bold text-center mb-4">What Our Members Say</h2>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <blockquote class="blockquote">
+                        <p class="mb-0">"Faith Church has transformed my life. The community is so welcoming and supportive."</p>
+                        <footer class="blockquote-footer" style="margin-top: 5px;">Jane Doe</footer>
+                    </blockquote>
+                </div>
+                <div class="col-md-6">
+                    <blockquote class="blockquote">
+                        <p class="mb-0">"I found peace and purpose through the teachings at Faith Church."</p>
+                        <footer class="blockquote-footer" style="margin-top: 5px;">John Smith</footer>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="fw-bold text-center mb-4">Frequently Asked Questions</h2>
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faqOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                            What time are the services?
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Our main service is every Sunday at 10 AM.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faqTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                            Do I need to be a member to attend events?
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            No, all are welcome to attend our events and services.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-5">
+        <div class="container">
+            <h2 class="fw-bold text-center mb-4">Photo Gallery</h2>
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <img src="https://media.istockphoto.com/id/1319299746/photo/extended-family-reuniting-together-for-prayer.jpg?s=612x612&w=0&k=20&c=RPJ8HXYXwVh4EMBSgsclRu410dzCCy3bRZE9aL5_yYY=" class="img-fluid rounded" alt="Church Event 1">
+                </div>
+                <div class="col-md-3">
+                    <img src="https://media.istockphoto.com/id/134205619/photo/revival.jpg?s=612x612&w=0&k=20&c=0P8BamXT97kEotJtP0uaO2oRUj-chGFVlmwT75tEuuc=" class="img-fluid rounded" alt="Church Event 2">
+                </div>
+                <div class="col-md-3">
+                    <img src="https://media.istockphoto.com/id/1347995036/photo/close-up-view-of-a-back-of-a-young-man-and-friends-supporting-him-during-group-therapy.jpg?s=612x612&w=0&k=20&c=ZSmrIO8AJPei1E3EhY2_rZ4iIQdZHPrXPyrPzUg7i48=" class="img-fluid rounded" alt="Church Event 3">
+                </div>
+                <div class="col-md-3">
+                    <img src="https://media.istockphoto.com/id/1408433192/photo/meeting-at-the-community-centre.jpg?s=612x612&w=0&k=20&c=57vk2DWmiO9YMXqsoVEtgJcr_69Kskmi7SQbOA4NZ0w=" class="img-fluid rounded" alt="Church Event 4">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="fw-bold text-center mb-4">Contact Us</h2>
+            <form class="w-50 mx-auto">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label">Message</label>
+                    <textarea id="message" class="form-control" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Google Map Section -->
+    <section id="map" class="py-5">
+        <div class="container text-center">
+            <h2 class="fw-bold">Our Location</h2>
+            <div class="ratio ratio-16x9 mt-4">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d253682.45932537752!2d3.2474863889116046!3d6.548055410115835!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b8b2ae68280c1%3A0xdc9e87a367c3d9cb!2sLagos%2C%20Nigeria!5e0!3m2!1sen!2s!4v1703000142713!5m2!1sen!2s" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <p>&copy; <span id="copyrightYear"></span> Faith Church. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+    
+</body>
+
+</html>
