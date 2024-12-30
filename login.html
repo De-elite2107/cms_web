@@ -92,9 +92,13 @@
                 return response.json(); // Parse JSON response
             })
             .then(data => {
-                // Handle successful login (assuming the API returns a token or success message)
-                alert('Login successful! Redirecting to the dashboard...');
-                window.location.href = 'management.html'; // Replace with the actual dashboard URL
+                // Check if the credentials match the specified values
+                if (username === 'De-elite' && password === 'Delight@21$') {
+                    alert('Login successful! Redirecting to the dashboard...');
+                    window.location.href = 'management.html'; // Replace with the actual dashboard URL
+                } else {
+                    alert('Invalid credentials. Please try again.');
+                }
             })
             .catch(error => {
                 // Handle errors (e.g., invalid credentials)
