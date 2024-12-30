@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,7 +47,6 @@
         }
     </style>
 </head>
-
 <body>
     <div class="login-container">
         <h1>Admin Login</h1>
@@ -73,15 +71,38 @@
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
-            // Mock authentication (Replace with real backend logic)
-            if (username === 'admin' && password === 'password') {
+            // Prepare the data to be sent in the request
+            const data = {
+                username: username,
+                password: password
+            };
+
+            // Send a POST request to the login API
+            fetch('https://cmsserver.up.railway.app/login/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json' // Specify content type as JSON
+                },
+                body: JSON.stringify(data) // Convert data object to JSON string
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json(); // Parse JSON response
+            })
+            .then(data => {
+                // Handle successful login (assuming the API returns a token or success message)
                 alert('Login successful! Redirecting to the dashboard...');
                 window.location.href = 'management.html'; // Replace with the actual dashboard URL
-            } else {
+            })
+            .catch(error => {
+                // Handle errors (e.g., invalid credentials)
                 alert('Invalid credentials. Please try again.');
-            }
+                console.error('There was a problem with the fetch operation:', error);
+            });
         });
+
     </script>
 </body>
-
 </html>
