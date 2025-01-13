@@ -157,11 +157,11 @@
     </div>
     <script>
         // Example endpoint URL
-        const apiUrl = "http://cmsserver.up.railway.app/api/send-mass-email/";
+        const apiUrl = "http://cmsserver.up.railway.app/send-mass-email/";
 
         // Dynamically populate recipients (you can replace this with a fetch to your backend)
         // Replace with your actual API endpoint
-        const usersApiUrl = "https://cmsserver.up.railway.app/api/get-all-users/";
+        const usersApiUrl = "https://cmsserver.up.railway.app/users/get-all-users/";
 
         // Function to fetch and populate recipients
         async function fetchAndPopulateRecipients() {
@@ -172,24 +172,22 @@
                     throw new Error("Authentication token is missing. Please log in again.");
                 }
 
-                const response = await fetch("https://cmsserver.up.railway.app/users/get-all-users/")
-                .then((response) => {
-                    if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return response; // Parse the response as JSON
-                })
-                .then((data) => {
-                    console.log("Users fetched successfully:", data);
-                    // Process the fetched data
-                    const users = data.data; // Assuming your API response includes `data` field
-                    users.forEach((user) => {
-                    console.log(`User: ${user.username} - Email: ${user.email}`);
-                    });
-                })
-                .catch((error) => {
-                    console.error("Error fetching users:", error);
+                const response = await fetch(usersApiUrl, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",// Include the token in headers
+                    },
                 });
+
+                // Handle non-2xx responses
+                if (!response.ok) {
+                    const errorMessage = `Failed to fetch recipients: ${response.status} ${response.statusText}`;
+                    throw new Error(errorMessage);
+                }
+
+                // Parse the response JSON
+                const users = await response.json();
+                console.log("Users fetched successfully:", users);
 
                 // Populate the recipients dropdown
                 const recipientsDropdown = document.getElementById("recipients");
@@ -198,7 +196,7 @@
                 }
 
                 recipientsDropdown.innerHTML = ""; // Clear existing options
-                users.forEach((user) => {
+                users.data.forEach((user) => {
                     const option = document.createElement("option");
                     option.value = user.email; // Set the value as the user's email
                     option.textContent = user.email; // Display the user's email
@@ -216,18 +214,11 @@
             fetchAndPopulateRecipients();
         });
         //end of dynamically allocating
-        const recipientsDropdown = document.getElementById("recipients");
-        recipients.forEach((user) => {
-            const option = document.createElement("option");
-            option.value = user.email;
-            option.textContent = user.email;
-            recipientsDropdown.appendChild(option);
-        });
-
         // Handle form submission
         document.getElementById("emailForm").addEventListener("submit", async (event) => {
             event.preventDefault(); // Prevent default form submission
-
+            const authToken = localStorage.getItem('authToken')
+            const recipientsDropdown = document.getElementById("recipients");
             const subject = document.getElementById("subject").value;
             const message = document.getElementById("message").value;
             const selectedRecipients = Array.from(recipientsDropdown.selectedOptions).map(
@@ -239,13 +230,13 @@
                 message,
                 recipients: selectedRecipients,
             };
-
+            console.info('info: ' , authToken, payload)
             try {
                 const response = await fetch(apiUrl, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
-                        Authorization: "Token your-auth-token", // Replace with the user's token
+                        Authorization: `Bearer ${authToken}`, // Replace with the user's token
                     },
                     body: JSON.stringify(payload),
                 });
