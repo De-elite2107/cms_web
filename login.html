@@ -73,6 +73,14 @@
         document.getElementById('loginForm').addEventListener('submit', function (e) {
             e.preventDefault(); // Prevent default form submission
 
+            // Get the login button
+            const loginButton = e.target.querySelector('button[type="submit"]');
+            const originalButtonText = loginButton.textContent;
+
+            // Set button text to "Logging in..."
+            loginButton.textContent = "Logging in...";
+            loginButton.disabled = true; // Disable the button to prevent multiple submissions
+
             // Get user input
             const username = document.getElementById('username').value.trim();
             const password = document.getElementById('password').value.trim();
@@ -84,6 +92,8 @@
             // Validate input
             if (!username || !password) {
                 showAlert('Please fill in all fields.', 'danger');
+                loginButton.textContent = originalButtonText; // Reset button text
+                loginButton.disabled = false; // Re-enable the button
                 return;
             }
 
@@ -113,7 +123,7 @@
             })
             .then(data => {
                 // Handle successful login
-                console.info('logged in: ', data)
+                console.info('logged in: ', data);
                 localStorage.setItem('authToken', data.token);
                 showAlert('Login successful! Redirecting...', 'success');
                 setTimeout(() => {
@@ -124,6 +134,11 @@
                 // Display error message
                 showAlert(error.message, 'danger');
                 console.error('Error:', error);
+            })
+            .finally(() => {
+                // Reset button text and re-enable the button after the request is complete
+                loginButton.textContent = originalButtonText;
+                loginButton.disabled = false;
             });
         });
 
