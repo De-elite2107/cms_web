@@ -45,11 +45,16 @@
             text-align: center;
             margin-top: 10px;
         }
+
+        .alert {
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 <body>
     <div class="login-container">
         <h1>Admin Login</h1>
+        <div id="alertContainer"></div> <!-- Container for error/success messages -->
         <form id="loginForm">
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
@@ -66,10 +71,21 @@
 
     <script>
         document.getElementById('loginForm').addEventListener('submit', function (e) {
-            e.preventDefault();
+            e.preventDefault(); // Prevent default form submission
 
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
+            // Get user input
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            // Clear previous alerts
+            const alertContainer = document.getElementById('alertContainer');
+            alertContainer.innerHTML = '';
+
+            // Validate input
+            if (!username || !password) {
+                showAlert('Please fill in all fields.', 'danger');
+                return;
+            }
 
             // Prepare the data to be sent in the request
             const data = {
@@ -78,35 +94,47 @@
             };
 
             // Send a POST request to the login API
-            fetch('https://cmsserver.up.railway.app/login/', {
+            fetch('https://cmsserver.up.railway.app/login/admin/', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json' // Specify content type as JSON
+                    'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(data) // Convert data object to JSON string
+                body: JSON.stringify(data)
             })
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
+                    // Check for 401 Unauthorized response
+                    if (response.status === 401) {
+                        throw new Error('Invalid credentials. Please try again.');
+                    }
+                    throw new Error('Something went wrong. Please try again later.');
                 }
                 return response.json(); // Parse JSON response
             })
             .then(data => {
-                // Check if the credentials match the specified values
-                if (username === 'De-elite' && password === 'Delight@21$') {
-                    alert('Login successful! Redirecting to the dashboard...');
-                    window.location.href = 'management.html'; // Replace with the actual dashboard URL
-                } else {
-                    alert('Invalid credentials. Please try again.');
-                }
+                // Handle successful login
+                console.info('logged in: ', data)
+                localStorage.setItem('authToken', data.token);
+                showAlert('Login successful! Redirecting...', 'success');
+                setTimeout(() => {
+                    window.location.href = "management.html"; // Redirect to dashboard
+                }, 2000);
             })
             .catch(error => {
-                // Handle errors (e.g., invalid credentials)
-                alert('Invalid credentials. Please try again.');
-                console.error('There was a problem with the fetch operation:', error);
+                // Display error message
+                showAlert(error.message, 'danger');
+                console.error('Error:', error);
             });
         });
 
+        // Function to display alerts
+        function showAlert(message, type) {
+            const alertContainer = document.getElementById('alertContainer');
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type}`;
+            alert.textContent = message;
+            alertContainer.appendChild(alert);
+        }
     </script>
 </body>
 </html>
