@@ -121,7 +121,7 @@
 <body>
     <div class="sidebar">
         <h2>Church Dashboard</h2>
-        <a href="#dashboard"><i class="fa fa-home me-2"></i> Dashboard</a>
+        <a href="#"><i class="fa fa-home me-2"></i> Dashboard</a>
         <a href="#registration"><i class="fa fa-user-plus me-2"></i> Registration</a>
         <a href="#attendance"><i class="fa fa-calendar-check me-2"></i> Attendance</a>
         <a href="#donation"><i class="fa fa-donate me-2"></i> Donation</a>
@@ -175,19 +175,8 @@
                         <th>End Date</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>2024-12-25</td>
-                        <td>Christmas Service</td>
-                        <td>Pastor John</td>
-                        <td>2024-12-25</td>
-                    </tr>
-                    <tr>
-                        <td>2025-01-01</td>
-                        <td>New Year Service</td>
-                        <td>Pastor Jane</td>
-                        <td>2025-01-01</td>
-                    </tr>
+                <tbody id="tableBody">
+                    
                 </tbody>
             </table>
         </section>
@@ -200,7 +189,7 @@
                 </div>
                 <div>
                     <label for="message">Message</label>
-                    <textarea id="message" class="form-control" name="message"></textarea>
+                    <textarea id="message" class="form-control" rows="5" name="message"></textarea>
                 </div><br>
                 <div>
                     <label for="emailRecipients">Recipients:</label><br>
@@ -219,7 +208,7 @@
             <form id="smsForm">
                 <div>
                     <label for="message">Message</label>
-                    <textarea id="message" class="form-control" name="message"></textarea>
+                    <textarea id="message" class="form-control" rows="5" name="message"></textarea>
                 </div><br>
                 <div>
                     <label for="smsRecipients">Recipients</label><br>
@@ -256,26 +245,43 @@
                 sidebar.style.width = '250px';
             }
         });
-        // Example endpoint URL
-        const emailApiUrl = "https://cmsserver.up.railway.app/send-mass-email/";
-        const smsApiUrl = "https://cmsserver.up.railway.app/send-mass-sms/";
+        
+        function formatDateTime(datetime, secs) {
+            const date = new Date(datetime);
+            
+            const year = date.getFullYear();
+            const month = ("0" + (date.getMonth() + 1)).slice(-2); // Adding leading zero for months
+            const day = ("0" + date.getDate()).slice(-2); // Adding leading zero for day
+            const hours = ("0" + date.getHours()).slice(-2); // Adding leading zero for hours
+            const minutes = ("0" + date.getMinutes()).slice(-2); // Adding leading zero for minutes
+            const seconds = ("0" + date.getSeconds()).slice(-2); // Adding leading zero for seconds
 
-        // Dynamically populate recipients (you can replace this with a fetch to your backend)
-        const usersApiUrl = "https://cmsserver.up.railway.app/users/get-all-users/";
+            // Format the date as 'YYYY-MM-DD HH:mm:ss'
+            if (secs) {
+                return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
+            }
+            else{
+                return `${day}-${month}-${year} ${hours}:${minutes}`;
+            }
+        }
+
         let users = [];
-
+        
         // Function to fetch and populate recipients
         async function fetchAndPopulateRecipients() {
+            // Dynamically populate recipients (you can replace this with a fetch to your backend)
+            const apiUrl = "https://cmsserver.up.railway.app/users/get-all-users/";
             try {
                 const authToken = localStorage.getItem("authToken");
                 if (!authToken) {
                     throw new Error("Authentication token is missing. Please log in again.");
                 }
 
-                const response = await fetch(usersApiUrl, {
+                const response = await fetch(apiUrl, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
+                        "Authorization": `Bearer ${authToken}`
                     },
                 });
 
@@ -312,7 +318,6 @@
         //Funtion to populate dashboard data
         // Simulate Data Fetching
         async function populatedashboard(){
-            
             const dashboardData = {
                 totalMembers: users.data.length,
                 totalMale: users.data.filter(user => user.gender === 'male').length,
@@ -328,9 +333,69 @@
             document.getElementById('todays-visitors').textContent = dashboardData.todaysVisitors;
             document.getElementById('total-donations').textContent = `$${dashboardData.totalDonations}`;
         }
+
+        async function populatevents(){
+            const apiUrl = "https://cmsserver.up.railway.app/events/get-all-events/"
+            try {
+                const authToken = localStorage.getItem("authToken");
+                if (!authToken) {
+                    throw new Error("Authentication token is missing. Please log in again.");
+                }
+
+                const response = await fetch(apiUrl, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${authToken}`
+                    },
+                });
+
+                if (!response.ok) {
+                    const errorMessage = `Failed to fetch recipients: ${response.status} ${response.statusText}`;
+                    throw new Error(errorMessage);
+                }
+
+                const events = await response.json();
+                console.log('Events fetched success: ', events)
+                if (events.message === "Events fetched successfully") {
+                    const eventsTableBody = document.getElementById("tableBody");
+                    eventsTableBody.innerHTML = "";  // Clear any existing rows
+
+                    events.data.forEach(event => {
+                        const row = document.createElement("tr");
+
+                        // Create a cell for each event attribute
+                        const startDateCell = document.createElement("td");
+                        startDateCell.textContent = formatDateTime(event.start_date);
+                        row.appendChild(startDateCell);
+
+                        const nameCell = document.createElement("td");
+                        nameCell.textContent = event.event_name;
+                        row.appendChild(nameCell);
+
+                        const managerCell = document.createElement("td");
+                        managerCell.textContent = event.event_manager;
+                        row.appendChild(managerCell);
+
+                        const endDateCell = document.createElement("td");
+                        endDateCell.textContent = formatDateTime(event.end_date);
+                        row.appendChild(endDateCell);
+
+                        // Append the row to the table body
+                        eventsTableBody.appendChild(row);
+                    });
+                } else {
+                    console.error("Error fetching events:", data.message);
+                }
+            } catch (error) {
+                console.error("Error fetching recipients:", error);
+                alert("An error occurred while fetching recipients. Please try again later.");
+            }
+        }
         
         document.addEventListener("DOMContentLoaded", async () => {
             await fetchAndPopulateRecipients();
+            await populatevents();
             populatedashboard();
         });
 
@@ -342,7 +407,7 @@
             const sendButton = document.getElementById("sendEmailButton");
             sendButton.disabled = true; 
             sendButton.textContent = "Sending Emails..."; 
-
+            const apiUrl = "https://cmsserver.up.railway.app/send-mass-email/";
             const authToken = localStorage.getItem('authToken');
             const emailRecipientsDropdown = document.getElementById("emailRecipients");
             const subject = document.getElementById("subject").value;
@@ -358,7 +423,7 @@
             };
 
             try {
-                const response = await fetch(emailApiUrl, {
+                const response = await fetch(apiUrl, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -390,7 +455,7 @@
             const sendButton = document.getElementById("sendSmsButton");
             sendButton.disabled = true; 
             sendButton.textContent = "Sending SMS..."; 
-
+            const apiUrl = "https://cmsserver.up.railway.app/send-mass-sms/";
             const authToken = localStorage.getItem('authToken');
             const smsRecipientsDropdown = document.getElementById("smsRecipients");
             const message = document.getElementById("message").value;
@@ -404,11 +469,11 @@
             };
 
             try {
-                const response = await fetch(smsApiUrl, {
+                const response = await fetch(apiUrl, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
-                        Authorization: `Bearer ${authToken}`,
+                        "Authorization": `Bearer ${authToken}`,
                     },
                     body: JSON.stringify(payload),
                 });
