@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Container */
+:root {
+  --primary-color: #000957;
+  --secondary-color: #344cb7;
+  --accent-color: #577bc1;
+  --neutral-color: #FFD700;
+}
+
+body {
+  background: var(--primary-color);
+  color: var(--neutral-color);
+}
+
+.bg-primary {
+  background-color: #000957;
+}
+
+.bg-secondary {
+  background-color: #344cb7;
+}
+
+.bg-accent {
+  background-color: #577bc1;
+}
+
+.bg-neutral{
+    background-color: #FFD700;
+}
